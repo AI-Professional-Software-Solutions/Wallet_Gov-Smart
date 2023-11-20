@@ -1,6 +1,6 @@
-# PandoraPay wallet
+# Gov-Smart Blockchain wallet & explorer
 
-PandoraPay wallet using Vue3. No SSR supported as it is intended to be a Single Page Application for Client usage.
+Gov-Smart Blockchain wallet is a fork of PandoraPay Wallet and is using Vue3. No SSR supported as it is intended to be a Single Page Application for Client usage.
 
 ## Compute Resource Hashes
 https://www.srihash.org/
@@ -14,7 +14,7 @@ https://www.srihash.org/
 
 ### compile wasm dev mode
 
-1. `cd ../go-pandora-pay`
+1. `cd ../Blockchain_Gov-Smart`
 2. run `./scripts/build-wasm.sh main dev`
 3. run `./scripts/build-wasm.sh helper dev`
 
@@ -24,7 +24,7 @@ https://www.srihash.org/
 ## Production
 
 ### compile wasm prod mode
-1. cd `./go-pandora-pay`
+1. cd `./Blockchain_Gov-Smart`
 2. run `./scripts/build-wasm.sh main build brotli zopfli`
 3. run `./scripts/build-wasm.sh helper build brotli zopfli`
 

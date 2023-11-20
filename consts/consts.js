@@ -1,9 +1,9 @@
 module.exports = {
 
-    name: "PandoraPay",
-    title: 'PandoraPay',
-    entity: 'PandoraPay',
-    website: 'https://pandorapay.org/',
+    name: "Gov-Smart Blockchain",
+    title: 'Gov-Smart Blockchain',
+    entity: 'Gov-Smart',
+    website: 'https://gov-smart.com/',
 
     assetsInfoPagination: 10,
     blocksInfoPagination: 10,

@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="g-0 justify-content-between fs--1 mt-4 mb-3 text-600">
+    <!-- <div class="g-0 justify-content-between fs--1 mt-4 mb-3 text-600">
 
       <div class="row pb-0 mb-0">
         <div class="col-12 col-auto text-center">
@@ -20,13 +20,13 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
 
 
-    <div v-if="$store.getters.isTestnet" class="fixed-button cursor-pointer " @click="handleShowTestnetFaucet"
+    <!-- <div v-if="$store.getters.isTestnet" class="fixed-button cursor-pointer " @click="handleShowTestnetFaucet"
          v-tooltip.top="`Testnet Faucet`">
       <div class="rounded-fixed-btn btn-secondary"><i class="fas fa-coins"></i></div>
-    </div>
+    </div> -->
 
   </footer>
 
