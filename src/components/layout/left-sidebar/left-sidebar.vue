@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <!-- <div> -->
     <nav class="navbar navbar-light navbar-vertical navbar-expand-xl">
     <div class="d-flex align-items-center">
       <router-link to="/" class="navbar-brand">
@@ -48,7 +48,7 @@
               <li class="nav-item">
                 <router-link :class="`nav-link ${route === '/explorer' ? 'active' : ''}`" to="/explorer" @click.native="disableNavbarMenu">
                   <div class="d-flex align-items-center">
-                    <i class="fas fa-cube"/>
+                    <i class="fas fa-cube"></i>
                     <span class="nav-link-text ps-1">Explore Blocks</span>
                   </div>
                 </router-link>
@@ -56,7 +56,7 @@
               <li class="nav-item">
                 <router-link :class="`nav-link ${route.indexOf('/explorer/mempool') === 0 ? 'active' : ''}`" to="/explorer/mempool" @click.native="disableNavbarMenu">
                   <div class="d-flex align-items-center">
-                    <i class="fas fa-list-ol"/>
+                    <i class="fas fa-list-ol"></i>
                     <span class="nav-link-text ps-1">Pending Transactions</span>
                   </div>
                 </router-link>
@@ -71,7 +71,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <div class="d-flex align-items-center">
               <span :class="`nav-link cursor-pointer ${route.indexOf('/advanced') === 0 ? 'active' : ''}`" @click.native="e => toggleNavElement(e,'advanced')">
                 <i class="fas fa-money-check"></i>
@@ -99,7 +99,7 @@
               <li class="nav-item" v-if="$store.state.settings.expert">
                 <router-link :disabled="!isWalletLogged" :class="`nav-link ${ route.indexOf('/advanced/public/resolution-conditional-payment') === 0 ? 'active' : ''} nav-link`" to="/advanced/public/resolution-conditional-payment" @click.native="disableNavbarMenu">
                   <div class="d-flex align-items-center">
-                    <i class="fas fa-gavel"/>
+                    <i class="fas fa-gavel"></i>
                     <span class="nav-link-text ps-1">Conditional Resolution</span>
                   </div>
                 </router-link>
@@ -107,13 +107,13 @@
               <li class="nav-item" v-if="$store.state.settings.expert">
                 <router-link :disabled="!isWalletLogged" :class="`nav-link ${ route.indexOf('/advanced/import-link') === 0 ? 'active' : ''} nav-link`" to="/advanced/import-link" @click.native="disableNavbarMenu">
                   <div class="d-flex align-items-center">
-                    <i class="fa fa-terminal"/>
+                    <i class="fa fa-terminal"></i>
                     <span class="nav-link-text ps-1">Import Transfer Link</span>
                   </div>
                 </router-link>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item" v-if="$store.state.settings.expert">
             <router-link :class="`nav-link ${route.indexOf('/settings') === 0 ? 'active' : ''} nav-link`" to="/settings" @click.native="disableNavbarMenu">
               <div class="d-flex align-items-center">
@@ -122,33 +122,35 @@
               </div>
             </router-link>
           </li>
-         
+          <div class="mt-3 mb-3" style="height: 1px; background-color: #748194; width: 100%;"></div>
+          <li class="nav-item">
+            <div class="g-0 justify-content-between fs--1 mb-3 text-600">
+              <div class="row pb-0 mb-0">
+                <div class="col-12 col-auto text-center d-flex flex-column justify-content-start align-items-start">
+                  <span class="pe-1">Consensus: <span class="text-success">{{ blockchainStatus }}</span></span>
+                  <span class="pe-1">Block Height: <span v-if="blockHeight" class="text-success">#{{ blockHeight }}</span></span>
+                  <span class="pe-1">WEB: {{ version }}</span>
+                  <span class="pe-1">WASM: {{ buildVersion }}</span>
+                  <!-- <span class="pe-1">2019 - 2022 <a :href="website" target="_blank">{{ entity }}</a> </span> -->
+                  <div class="mt-3 mb-3" style="height: 1px; background-color: #748194; width: 100%;"></div>
+                  <span class="pe-1">Open Source</span>
+                  <a class="pe-1" href="https://github.com/AI-Professional-Software-Solutions/Blockchain_Gov-Smart">Blockchain</a>
+                  <a class="pe-1" href="https://github.com/AI-Professional-Software-Solutions/Wallet_Gov-Smart" >Wallet & Explorer</a>
+                  <!-- <div class="mt-3 mb-3" style="height: 1px; background-color: #748194; width: 100%;"></div> -->
+                  <a href="portal.gov-smart.com" target="_blank" class="mt-3">
+                    <span>Go to Portal</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
     </nav>
     
-    <div class="g-0 justify-content-between fs--1 mt-4 mb-3 text-600">
-      <div class="row pb-0 mb-0">
-        <div class="col-12 col-auto text-center">
-          <span class="pe-1">Consensus</span>
-          <span class="pe-1 text-success">{{ blockchainStatus }}</span>
-          <span class="pe-1">Block Height</span>
-          <span v-if="blockHeight" class="text-success">#{{ blockHeight }}</span>
-        </div>
-      </div>
 
-      <div class="row pb-0 mb-0">
-        <div class="col-12 col-auto text-center">
-          <span>WEB: {{ version }} WASM: {{ buildVersion }} </span>
-        </div>
-        <div class="col-12 col-auto text-center">
-          <span>2019 - 2022 <a :href="website" target="_blank">{{ entity }}</a> </span>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <!-- </div> -->
 
 </template>
 
