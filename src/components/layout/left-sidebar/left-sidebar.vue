@@ -5,7 +5,7 @@
     <div class="d-flex align-items-center">
       <router-link to="/" class="navbar-brand">
         <div class="d-flex align-items-center py-3">
-          <img class="me-2 logo" :src="require(`src/assets/logo-inline${$store.state.settings.dark?'':''}.png`).default" :alt="name">
+          <img class="me-2 logo" :src="require(`src/assets/${$store.state.settings.dark ?'white':'black'}/logo-inline.png`).default" :alt="name">
         </div>
       </router-link>
     </div>
