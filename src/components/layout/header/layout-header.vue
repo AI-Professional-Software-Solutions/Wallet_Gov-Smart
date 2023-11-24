@@ -24,9 +24,9 @@
         <i :class="`fas fa-${$store.state.settings.dark ?'sun':'moon'} nav-item-icon `"/>
       </div>
 
-      <div class="menu-right-item cursor-pointer d-none d-sm-block" >
+      <!-- <div class="menu-right-item cursor-pointer d-none d-sm-block" >
         <header-network ref="refHeaderNetwork" @closeOtherMenus="closeMenu"  />
-      </div>
+      </div> -->
 
       <div class="menu-right-item" style="min-width: 55px">
         <header-account ref="refHeaderAccount" @closeOtherMenus="closeMenu"/>
@@ -74,7 +74,7 @@ export default {
     closeMenu() {
       this.$store.commit('setLeftSidebarShow', false)
       this.$refs.refHeaderAccount.closeMenu()
-      this.$refs.refHeaderNetwork.closeMenu()
+      // this.$refs.refHeaderNetwork.closeMenu()
     }
   },
 
