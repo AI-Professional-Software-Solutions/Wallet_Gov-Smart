@@ -173,6 +173,7 @@ export default {
 
       const json = MyTextDecode(jsonData)
 
+      // Not sure if '.pandora' ending should be replaced with '.wallet' or '.govsmart'
       const fileName = consts.name + "_" + this.walletAddress.name + "_" + this.walletAddress.addressEncoded + ".pandora";
 
       const file = new Blob([json], {type: "application/json;charset=utf-8"});

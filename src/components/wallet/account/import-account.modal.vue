@@ -14,6 +14,7 @@
 
         <template v-slot:tab_0>
           <div>
+            <!-- if '.pandora' was changed in waller/accout/account.vue, then change this too -->
             <label class="form-label" for="selectFile">Select .pandora file</label>
             <input class="form-control" id="selectFile" type="file" v-on:change="handleImportAccounts" size="1"
                    accept=".pandora" ref="refImportedAddresses"/>
@@ -107,6 +108,7 @@ export default {
 
       let extension = file.name.split('.').pop();
 
+      /// If '.pandora' was changed in waller/accout/account.vue, then change this too
       if (extension !== "pandora") throw `File not supported. Maybe wrong file? `
 
       const reader = new FileReader();

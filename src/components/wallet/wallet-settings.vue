@@ -20,6 +20,7 @@
         <div class="dropdown-divider"></div>
 
         <div class="two-buttons">
+          <!-- if '.pandora' was changed in waller/accout/account.vue, then change this too -->
           <loading-button :submit="handleExportWallet" text="Export Wallet" icon="fas fa-download" tooltip="Export your wallet to your computer" class-custom="cursor-pointer dropdown-item" component="span" :can-load="false"/>
           <loading-button :submit="handleImportWallet" text="Import Wallet" icon="fas fa-upload" tooltip="Import a pandora wallet from your computer" class-custom="cursor-pointer dropdown-item" component="span" :can-load="false"/>
         </div>
@@ -77,6 +78,7 @@ export default {
 
       const json = MyTextDecode(jsonData)
 
+      // If '.pandora' was changed in waller/accout/account.vue, then change this too -->
       const fileName = consts.name+".pandorawallet";
 
       const file = new Blob([json], {type: "application/json;charset=utf-8"});
