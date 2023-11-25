@@ -14,9 +14,9 @@
 
         <template v-slot:tab_0>
           <div>
-            <label class="form-label" for="selectFile">Select .pandora file</label>
+            <label class="form-label" for="selectFile">Select .GovS file</label>
             <input class="form-control" id="selectFile" type="file" v-on:change="handleImportAccounts" size="1"
-                   accept=".pandora" ref="refImportedAddresses"/>
+                   accept=".GovS" ref="refImportedAddresses"/>
           </div>
         </template>
 
@@ -107,7 +107,7 @@ export default {
 
       let extension = file.name.split('.').pop();
 
-      if (extension !== "pandora") throw `File not supported. Maybe wrong file? `
+      if (extension !== "GovS") throw `File not supported. Maybe wrong file? `
 
       const reader = new FileReader();
 

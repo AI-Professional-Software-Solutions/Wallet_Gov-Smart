@@ -173,7 +173,7 @@ export default {
 
       const json = MyTextDecode(jsonData)
 
-      const fileName = consts.name + "_" + this.walletAddress.name + "_" + this.walletAddress.addressEncoded + ".pandora";
+      const fileName = consts.name + "_" + this.walletAddress.name + "_" + this.walletAddress.addressEncoded + ".GovS";
 
       const file = new Blob([json], {type: "application/json;charset=utf-8"});
       FileSaver.saveAs(file, fileName);

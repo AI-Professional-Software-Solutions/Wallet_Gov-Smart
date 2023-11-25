@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       img: "",
-      logo: require(`src/assets/logo-square.png`).default,
+      logo: require(`src/assets/${$store.state.settings.dark ?'white':'black'}/logo-square.png`).default,
       loaded: false,
       options: {
         data: this.data,

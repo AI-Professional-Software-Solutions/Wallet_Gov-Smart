@@ -21,7 +21,7 @@
 
         <div class="two-buttons">
           <loading-button :submit="handleExportWallet" text="Export Wallet" icon="fas fa-download" tooltip="Export your wallet to your computer" class-custom="cursor-pointer dropdown-item" component="span" :can-load="false"/>
-          <loading-button :submit="handleImportWallet" text="Import Wallet" icon="fas fa-upload" tooltip="Import a pandora wallet from your computer" class-custom="cursor-pointer dropdown-item" component="span" :can-load="false"/>
+          <loading-button :submit="handleImportWallet" text="Import Wallet" icon="fas fa-upload" tooltip="Import a GovS wallet from your computer" class-custom="cursor-pointer dropdown-item" component="span" :can-load="false"/>
         </div>
         <div class="dropdown-divider"></div>
         <div class="two-buttons">
@@ -77,7 +77,7 @@ export default {
 
       const json = MyTextDecode(jsonData)
 
-      const fileName = consts.name+".pandorawallet";
+      const fileName = consts.name+".GovSwallet";
 
       const file = new Blob([json], {type: "application/json;charset=utf-8"});
       FileSaver.saveAs(file, fileName);

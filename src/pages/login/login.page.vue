@@ -5,7 +5,7 @@
     <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
 
       <div class="d-flex flex-center mb-3">
-        <img :src="require(`src/assets/logo-square${$store.state.settings.dark?'':''}.png`).default" class="logo" :alt="name">
+        <img :src="require(`src/assets/${$store.state.settings.dark ?'white':'black'}/logo-square.png`).default" class="logo" :alt="name">
       </div>
       <h1 class="d-flex flex-center mb-3 logo-color">{{ name }}</h1>
 
