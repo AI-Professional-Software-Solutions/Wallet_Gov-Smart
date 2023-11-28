@@ -5,7 +5,7 @@
     <div class="d-flex align-items-center">
       <router-link to="/" class="navbar-brand">
         <div class="d-flex align-items-center py-3">
-          <a href="https://gov-smart.com/" target="_blank">
+          <a @click="redirectToExternalLink" href="https://gov-smart.com/" target="_blank">
             <img class="me-2 logo" :src="require(`src/assets/${$store.state.settings.dark ?'white':'black'}/logo-inline.png`).default" :alt="name">
           </a>
         </div>
@@ -233,6 +233,10 @@ export default {
     },
     handleShowTestnetFaucet() {
       this.$store.state.page.testnetFaucetModal.showModal()
+    },
+
+    redirectToExternalLink() {
+      window.open('https://gov-smart.com/', '_blank');
     },
   },
 
