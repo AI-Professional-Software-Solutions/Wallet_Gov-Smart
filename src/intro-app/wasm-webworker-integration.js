@@ -30,7 +30,7 @@ export default class WasmWebworkerIntegration {
         }
 
         const output = await this.download(this.wasmFileName, this.wasmSri, (loaded, total) => {
-            progressStatusCallback("WASM downloading "+ formatLoadedSize(loaded, total) )
+            progressStatusCallback("Initiating Blockchain in your browser. WASM Downloading "+ formatLoadedSize(loaded, total) )
         })
 
         if (!output) throw `Error downloading ${this.wasmFileName}`
