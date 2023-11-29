@@ -13,26 +13,26 @@
                     <div class="cube-wrapper">
                       <div class="cube">
                         <div class="cube-faces">
-                          <div class="cube-face shadow"></div>
-                          <div class="cube-face bottom"><img :src="require(`src/assets/countries/FR_logo.png`).default" :alt="name"></div>
-                          <div class="cube-face top"><img :src="require(`src/assets/countries/RO_logo.png`).default" :alt="name"></div>
-                          <div class="cube-face left"><img :src="require(`src/assets/countries/ES_logo.png`).default" :alt="name"></div>
-                          <div class="cube-face right"><img :src="require(`src/assets/countries/JP_logo.png`).default" :alt="name"></div>
-                          <div class="cube-face back"><img :src="require(`src/assets/countries/DE_logo.png`).default" :alt="name"></div>
-                          <div class="cube-face front"><img :src="require(`src/assets/countries/US_logo.png`).default" :alt="name"></div>
+                          <div class="cube-face shadow" :style="cubeComputedStyle"></div>
+                          <div class="cube-face bottom" :style="cubeComputedStyle"><img :src="require(`src/assets/countries/FR_logo.png`).default" :alt="name"></div>
+                          <div class="cube-face top"    :style="cubeComputedStyle"><img :src="require(`src/assets/countries/RO_logo.png`).default" :alt="name"></div>
+                          <div class="cube-face left"   :style="cubeComputedStyle"><img :src="require(`src/assets/countries/ES_logo.png`).default" :alt="name"></div>
+                          <div class="cube-face right"  :style="cubeComputedStyle"><img :src="require(`src/assets/countries/JP_logo.png`).default" :alt="name"></div>
+                          <div class="cube-face back"   :style="cubeComputedStyle"><img :src="require(`src/assets/countries/DE_logo.png`).default" :alt="name"></div>
+                          <div class="cube-face front"  :style="cubeComputedStyle"><img :src="require(`src/assets/countries/US_logo.png`).default" :alt="name"></div>
                         </div>
                       </div>
                     </div>
                 </div>
               </div>
 
-              <h1 class="text-center">{{ name.toUpperCase() }}</h1>
+              <h1 class="text-center" :style="h1ComputedStyle">{{ name.toUpperCase() }}</h1>
 
               <div class="loading-text-div">
                 <div class="container">
-                  <div class="progress-bar__container">
-                    <div class="progress-bar">
-                      <span class="progress-bar__text">Uploaded Successfully!</span>
+                  <div class="progress-bar__container" :style="loadbarContainerComputedStyle">
+                    <div class="progress-bar" :style="loadbarComputedStyle">
+                      <span>{{ loadbarPercentage }}%</span>
                     </div>
                   </div>
                 </div>
@@ -42,8 +42,6 @@
                 <i v-if="isDownloading" class="fas fa-spinner fa-spin"></i>
                 {{ progressStatus }}
                 </span>
-
-                
 
               </div>
             </div>
@@ -73,6 +71,7 @@ export default {
       isDownloading: false,
       error: "",
       dark: false,
+      loadedPercent: 0,
     }
   },
 
@@ -83,14 +82,59 @@ export default {
   computed: {
     name() {
       return consts.name
+    },
+    loadbarPercentage() { 
+      return this.loadedPercent
+    },
+    cubeComputedStyle() {
+      if (this.dark) {
+        return {
+          background: 'linear-gradient(to bottom right, #273b55, #34133f)',
+          border: 'solid 1px rgb(11, 23, 39)'
+        }
+      }
+      return {
+        background: 'linear-gradient(to bottom right, #110d31ff, #4a4671)',
+        border: 'solid 1px rgb(255, 255, 255)'
+      }
+    },
+    h1ComputedStyle() {
+      if (this.dark) {
+        return {
+          color: '#ffffff'
+        }
+      }
+      return {
+        color: '#1677d7'
+      }
+    },
+    loadbarContainerComputedStyle() {
+      if (this.dark) {
+        return {
+          'box-shadow': '0 0 5px #ffffff'
+        }
+      }
+      return {
+        'box-shadow': '0 0 5px #1677d7'
+      }
+    },
+    loadbarComputedStyle() {
+      if (this.dark) {
+        return {
+          background: '#ffffff',
+          width: this.loadedPercent + '%',
+          color: 'black'
+        }
+      }
+      return {
+         background: 'linear-gradient(to right, #B993D6, #1677d7)',
+         width: this.loadedPercent + '%',
+         color: '#ffffff'
+      }
     }
   },
-
+  
   mounted() {
-
-    // const script = document.createElement('script');
-    // script.src = src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js";
-    // document.body.appendChild(script);
 
     if (typeof window === "undefined") return;
 
@@ -169,7 +213,15 @@ export default {
                 })
 
 
-                const data = await integrationHelper.downloadWasm(status => console.log("helper:", status))
+                const data = await integrationHelper.downloadWasm(status => {
+                  console.log("helper:", status.message)
+                  
+                  if (typeof status.downlowded !== "undefined") {
+                    this.loadedPercent = Math.ceil(status.downlowded / 5697801 * 100)
+                    console.log("Helper loaded:", status.downlowded , wasmHelperFileSize ," mb | loadedPercent:", this.loadedPercent)
+                  }
+                })
+
                 await integrationHelper.createWorker()
                 integrationHelper.initialize(data)
               }
@@ -179,12 +231,18 @@ export default {
 
           }
 
-          // Comment this out to stop automatic redirect from loadscreen
           await PandoraPayWallet.loadApp()
 
         })
 
-        const data = await integration.downloadWasm(status => this.progressStatus = status)
+        const data = await integration.downloadWasm(status => {
+          this.progressStatus = status.message
+
+          if (typeof status.downloaded !== "undefined") {
+            this.loadedPercent = Math.ceil(status.downloaded / 11347404 * 100) 
+            console.log("Main loaded:", status.downloaded , wasmMainFileSize ," mb | loadedPercent:", this.loadedPercent)
+          }
+        })
 
         this.progressStatus = "Web Worker created"
         await integration.createWorker()
@@ -203,37 +261,6 @@ export default {
 
 }
 
-// const progressBarContainer = document.querySelector('.progress-bar__container');
-// const progressBar = document.querySelector('.progress-bar');
-// const progressBarText = document.querySelector('.progress-bar__text');
-
-// const progressBarStates = [0, 7, 27, 34, 68, 80, 95, 100];
-
-// let time = 0;
-// let endState = 100;
-
-// progressBarStates.forEach(state => {
-//   let randomTime = Math.floor(Math.random() * 3000);
-//   setTimeout(() => {
-//     if(state == endState){
-//       gsap.to(progressBar, {
-//         x: `${state}%`,
-//         duration: 2,
-//         backgroundColor: '#4895ef',
-//         onComplete: () => {
-//           progressBarText.style.display = "initial";
-//           progressBarContainer.style.boxShadow = '0 0 5px #4895ef';
-//         }
-//       });
-//     }else{
-//       gsap.to(progressBar, {
-//         x: `${state}%`,
-//         duration: 2,
-//       });
-//     }
-//   }, randomTime + time);
-//   time += randomTime;
-// })
 
 </script>
 
@@ -242,7 +269,6 @@ export default {
 h1 {
   font-size: 30px;
   padding-top: 20px;
-  color: #1677d7;
 }
 
 .logo {
@@ -287,13 +313,13 @@ h1 {
 
 .cube-wrapper {
   transform-style: preserve-3d;
-  animation: bouncing 2s infinite;
+  animation: bouncing 2.5s infinite;
 }
 
 .cube {
   transform-style: preserve-3d;
   transform: rotateX(45deg) rotateZ(45deg);
-  animation: rotation 2s infinite;
+  animation: rotation 2.5s infinite;
 }
 
 .cube-faces {
@@ -305,24 +331,17 @@ h1 {
   transform: translateX(0) translateY(0) translateZ(-80px);
 }
 
+/* Colors for light theme */
 .cube-face {
   position: absolute;
   inset: 0;
-  background: #110d31ff;
+  background: rgb(193, 184, 255);
   border: solid 1px rgb(255, 255, 255);
-}
-
-.cube-face.dark {
-  position: absolute;
-  inset: 0;
-  /* background: #110d31ff; */
-  background: rgb(255, 255, 255);
-  border: solid 1px rgb(191, 197, 230);
 }
 
 .cube-face.shadow {
   transform: translateZ(-160px);
-  animation: bouncing-shadow 2s infinite;
+  animation: bouncing-shadow 2.5s infinite;
 }
 .cube-face.top {
   transform: translateZ(160px) rotate(90deg);
@@ -333,11 +352,11 @@ h1 {
 }
 .cube-face.back {
   transform-origin: 0 50%;
-  transform: rotateY(-90deg) translateZ(-160px) rotateZ(90deg) translateX(-80px) translateY(-80px);
+  transform: rotateY(-90deg) translateZ(-160px) rotateZ(-90deg) rotateX(180deg) translateX(-80px) translateY(-80px);
 }
 .cube-face.right {
   transform-origin: 50% 0;
-  transform: rotateX(-90deg) translateY(-160px);
+  transform: rotateX(-90deg) translateY(-160px) rotateY(180deg);
 }
 .cube-face.left {
   transform-origin: 50% 0;
@@ -409,30 +428,20 @@ h1 {
   border-radius: 0.1rem;
   position: relative;
   overflow: hidden;
-  transition: all 0.5s;
   will-change: transform;
-  box-shadow: 0 0 5px #1677d7;
 }
 
 .progress-bar {
   position: absolute;
   height: 100%;
-  width: 100%;
-  content: "";
-  background-color: #1677d7;
   top:0;
   bottom: 0;
-  left: -100%;
   border-radius: inherit;
   display: flex;
   justify-content: center;
-  align-items:center;
-  color: white;
+  align-items:flex-end;
   font-family: sans-serif;
-}
-
-.progress-bar__text {
-  display: none;
+  transition: width 0.5s ease;
 }
 
 </style>

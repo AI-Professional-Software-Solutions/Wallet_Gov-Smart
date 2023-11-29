@@ -29,9 +29,15 @@ export default class WasmWebworkerIntegration {
             return `${( loaded / 1024 / 1024 ).toFixed(2)}mb`
         }
 
+        // const output = await this.download(this.wasmFileName, this.wasmSri, (loaded, total) => {
+        //     progressStatusCallback("Initiating Blockchain in your browser. WASM Downloading "+ formatLoadedSize(loaded, total) )
+        // })
         const output = await this.download(this.wasmFileName, this.wasmSri, (loaded, total) => {
-            progressStatusCallback("Initiating Blockchain in your browser. WASM Downloading "+ formatLoadedSize(loaded, total) )
-        })
+            progressStatusCallback({
+                message: "Initiating Blockchain in your browser. WASM Downloading " + formatLoadedSize(loaded, total),
+                downloaded: loaded
+            });
+        });
 
         if (!output) throw `Error downloading ${this.wasmFileName}`
 
