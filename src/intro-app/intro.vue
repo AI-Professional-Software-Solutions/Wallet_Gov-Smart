@@ -31,9 +31,8 @@
               <div class="loading-text-div">
                 <div class="container">
                   <div class="progress-bar__container" :style="loadbarContainerComputedStyle">
-                    <div class="progress-bar" :style="loadbarComputedStyle">
-                      <span>{{ loadbarPercentage }}%</span>
-                    </div>
+                    <div class="progress-bar" :style="loadbarComputedStyle"> </div>
+                    <span class="progress-bar-text">{{ loadbarPercentage }}%</span>
                   </div>
                 </div>
 
@@ -111,11 +110,11 @@ export default {
     loadbarContainerComputedStyle() {
       if (this.dark) {
         return {
-          'box-shadow': '0 0 5px #ffffff'
+          'box-shadow': '0 0 5px #ffffff',
         }
       }
       return {
-        'box-shadow': '0 0 5px #1677d7'
+        'box-shadow': '0 0 5px #1677d7',
       }
     },
     loadbarComputedStyle() {
@@ -123,13 +122,11 @@ export default {
         return {
           background: '#ffffff',
           width: this.loadedPercent + '%',
-          color: 'black'
         }
       }
       return {
          background: 'linear-gradient(to right, #B993D6, #1677d7)',
          width: this.loadedPercent + '%',
-         color: '#ffffff'
       }
     }
   },
@@ -237,9 +234,14 @@ export default {
 
         const data = await integration.downloadWasm(status => {
           this.progressStatus = status.message
+          console.log("Status message:", this.progressStatus)
 
           if (typeof status.downloaded !== "undefined") {
-            this.loadedPercent = Math.ceil(status.downloaded / 11347404 * 100) 
+            if (wasmMainFileSize > 0) {
+              this.loadedPercent = (status.downloaded / wasmMainFileSize * 100).toFixed(2)
+            } else {
+              this.loadedPercent = (status.downloaded / 11347404 * 100).toFixed(2)
+            }
             console.log("Main loaded:", status.downloaded , wasmMainFileSize ," mb | loadedPercent:", this.loadedPercent)
           }
         })
@@ -429,6 +431,8 @@ h1 {
   position: relative;
   overflow: hidden;
   will-change: transform;
+  color: #ffffff;
+  text-shadow: 0.5px 0.5px 1.5px rgb(16 23 38);
 }
 
 .progress-bar {
@@ -439,9 +443,16 @@ h1 {
   border-radius: inherit;
   display: flex;
   justify-content: center;
-  align-items:flex-end;
+  align-items: center;
   font-family: sans-serif;
   transition: width 0.5s ease;
+}
+
+.progress-bar-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 </style>

@@ -24,7 +24,7 @@ export default class WasmWebworkerIntegration {
         function formatLoadedSize (loaded, total) {
             if (wasmFileSize > 0) {
                 const totalStr = total ? `${ (total/1024/1024).toFixed(2)}mb - ` : ''
-                return totalStr + `${Math.floor(loaded / wasmFileSize * 10000) / 100}%`
+                return `${(loaded/1024/1024).toFixed(2)}mb/` + totalStr
             }
             return `${( loaded / 1024 / 1024 ).toFixed(2)}mb`
         }
