@@ -5,7 +5,9 @@
     <div class="d-flex align-items-center">
       <router-link to="/" class="navbar-brand">
         <div class="d-flex align-items-center py-3">
-          <img class="me-2 logo" :src="require(`src/assets/${$store.state.settings.dark ?'white':'black'}/logo-inline.png`).default" :alt="name">
+          <a @click="redirectToExternalLink" href="https://gov-smart.com/" target="_blank">
+            <img class="me-2 logo" :src="require(`src/assets/${$store.state.settings.dark ?'white':'black'}/logo-inline.png`).default" :alt="name">
+          </a>
         </div>
       </router-link>
     </div>
@@ -137,7 +139,7 @@
                   <a class="pe-1" href="https://github.com/AI-Professional-Software-Solutions/Blockchain_Gov-Smart">Blockchain</a>
                   <a class="pe-1" href="https://github.com/AI-Professional-Software-Solutions/Wallet_Gov-Smart" >Wallet & Explorer</a>
                   <!-- <div class="mt-3 mb-3" style="height: 1px; background-color: #748194; width: 100%;"></div> -->
-                  <a href="portal.gov-smart.com" target="_blank" class="mt-3">
+                  <a href="https://gov-smart.com/" target="_blank" class="mt-3">
                     <span>Go to Portal</span>
                   </a>
                 </div>
@@ -231,6 +233,10 @@ export default {
     },
     handleShowTestnetFaucet() {
       this.$store.state.page.testnetFaucetModal.showModal()
+    },
+
+    redirectToExternalLink() {
+      window.open('https://gov-smart.com/', '_blank');
     },
   },
 

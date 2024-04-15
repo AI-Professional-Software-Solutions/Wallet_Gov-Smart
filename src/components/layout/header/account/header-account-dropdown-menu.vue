@@ -34,7 +34,7 @@
           <loading-button :submit="handleCreateNewAddress" text="Create Account" icon="fas fa-plus" tooltip="Create a new Address" class-custom="cursor-pointer dropdown-item" component="span"/>
           <div class="form-check form-switch cursor-pointer dropdown-item" @click.stop="switchExpertMode" v-tooltip.bottom="`Switch between the Expert and Basic mode of the Wallet.`" >
             <input class="form-check-input cursor-pointer" type="checkbox" :checked="$store.state.settings.expert" >
-            <label class="form-check-label cursor-pointer m-0">Switch Expert mode</label>
+            <label class="form-check-label cursor-pointer m-0">Switch to Expert Mode</label>
           </div>
         </div>
       </div>

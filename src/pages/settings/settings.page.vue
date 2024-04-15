@@ -39,7 +39,7 @@
                 <h6 class="text-800 fs--2 text-nowrap">Expert</h6>
                 <h5 class="text-800 align-middle">
                   <i class="fas fa-cogs"></i>
-                  Expert settings
+                  Switch to Expert Mode
                 </h5>
               </div>
             </a>
